@@ -1,0 +1,93 @@
+{
+  "format": 1,
+  "restore": {
+    "D:\\SoftUni\\DevOps\\Containers-and-Cloud\\08_Exercise_IaC_and_Monitoring\\08-EC-IaC-and-Mon-Res\\03_Azure-Web-App-with-Database-TaskBoard\\TaskBoard.Data\\TaskBoard.Data.csproj": {}
+  },
+  "projects": {
+    "D:\\SoftUni\\DevOps\\Containers-and-Cloud\\08_Exercise_IaC_and_Monitoring\\08-EC-IaC-and-Mon-Res\\03_Azure-Web-App-with-Database-TaskBoard\\TaskBoard.Data\\TaskBoard.Data.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\SoftUni\\DevOps\\Containers-and-Cloud\\08_Exercise_IaC_and_Monitoring\\08-EC-IaC-and-Mon-Res\\03_Azure-Web-App-with-Database-TaskBoard\\TaskBoard.Data\\TaskBoard.Data.csproj",
+        "projectName": "TaskBoard.Data",
+        "projectPath": "D:\\SoftUni\\DevOps\\Containers-and-Cloud\\08_Exercise_IaC_and_Monitoring\\08-EC-IaC-and-Mon-Res\\03_Azure-Web-App-with-Database-TaskBoard\\TaskBoard.Data\\TaskBoard.Data.csproj",
+        "packagesPath": "C:\\Users\\Shpaikov\\.nuget\\packages\\",
+        "outputPath": "D:\\SoftUni\\DevOps\\Containers-and-Cloud\\08_Exercise_IaC_and_Monitoring\\08-EC-IaC-and-Mon-Res\\03_Azure-Web-App-with-Database-TaskBoard\\TaskBoard.Data\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\Shpaikov\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "Microsoft.AspNetCore.Identity": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[6.0.11, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[6.0.11, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[6.0.11, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[6.0.23, 6.0.23]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Ref",
+              "version": "[6.0.23, 6.0.23]"
+            },
+            {
+              "name": "Microsoft.WindowsDesktop.App.Ref",
+              "version": "[6.0.23, 6.0.23]"
+            }
+          ],
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.402\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
