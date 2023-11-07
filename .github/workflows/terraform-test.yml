@@ -19,7 +19,7 @@ jobs:
 
     # Install the latest version of the Terraform CLI
       - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v1
+        uses: hashicorp/setup-terraform@v4
         with:
           terraform_version: latest
           # cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
