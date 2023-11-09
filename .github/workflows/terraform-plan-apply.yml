@@ -55,7 +55,7 @@ jobs:
     # Generates an execution plan for Terraform
     - name: 'Terraform Plan'
       id: plan
-      run: terraform plan -out=tfplan.out
+      run: terraform plan -out=tfplan
       # continue-on-error: true
 
     # Save plan to artifacts  
