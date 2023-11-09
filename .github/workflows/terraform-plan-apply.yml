@@ -62,8 +62,8 @@ jobs:
     - name: Publish Terraform Plan
       uses: actions/upload-artifact@v3
       with:
-        name: tfplan
-        path: tfplan
+        name: tfplan-lokum
+        path: tfplan-lokum
 
   terraform-apply:
     name: 'Terraform Apply'
@@ -87,8 +87,8 @@ jobs:
     - name: Download Terraform Plan
       uses: actions/download-artifact@v3
       with:
-        name: tfplan
+        name: tfplan-lokum
 
     # Terraform Apply
     - name: Terraform Apply
-      run: terraform apply -auto-approve tfplan 
+      run: terraform apply -auto-approve tfplan-lokum
