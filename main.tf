@@ -65,7 +65,7 @@ resource "azurerm_linux_web_app" "webapp" {
 # Deploy code from a public GitHub repo
 resource "azurerm_app_service_source_control" "assc" {
   app_id                 = azurerm_linux_web_app.webapp.id
-  repo_url               = var.repo_URL # "https://github.com/stefanov13/TaskBoard-Web-app-.git"
+  repo_url               = var.repo_URL # "https://github.com/stefanov13/TaskBoard-Web-app.git"
   branch                 = "main"
   use_manual_integration = true
 }
