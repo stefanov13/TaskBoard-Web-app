@@ -1,183 +1,183 @@
-# name: "Terraform-Plan-Apply"
-
-# on:
-#   push:
-#     branches:
-#       - main
-#   pull_request:
-#     branches:
-#       - main
-# env:
-#   ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
-#   ARM_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
-#   ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-#   ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
-
-# jobs:
-#   terraform-plan:
-#     name: terraform-plan
-#     runs-on: ubuntu-latest
-#     permissions:
-#       pull-requests: write
-
-#     steps:
-#     # Checkout the repository to the GitHub Actions runner
-#     - name: Checkout
-#       uses: actions/checkout@v3
-
-#     # Install the latest version of the Terraform CLI
-#     - name: Setup Terraform
-#       uses: hashicorp/setup-terraform@v2
-#       with:
-#         terraform_version: latest
-#         terraform_wrapper: false
-
-#     # Login to Azure via Azure CLI
-#     - name: Azure LogIn
-#       uses: azure/login@v1
-#       with:
-#         creds: ${{ secrets.AZURE_CREDENTIALS }}
-
-#     # Initialize a new or existing Terraform working directory
-#     # Creating initial files, loading any remote state, downloading modules, etc.
-#     - name: Terraform Init
-#       id: init
-#       run: terraform init
-      
-#     # Checks that all Terraform configuration files adhere to a canonical format
-#     - name: Terraform Format
-#       run: terraform fmt
-
-#     # Validate that all Terraform configuration files are valid
-#     - name: Terraform Validate
-#       run: terraform validate
-
-#     # Generates an execution plan for Terraform
-#     - name: 'Terraform Plan'
-#       id: plan
-#       run: terraform plan -out=tfplan.out
-#       # continue-on-error: true
-
-#     # Save plan to artifacts  
-#     - name: Publish Terraform Plan
-#       uses: actions/upload-artifact@v3
-#       with:
-#         name: tfplan
-#         path: tfplan
-
-#   terraform-apply:
-#     name: 'Terraform Apply'
-#     runs-on: ubuntu-latest
-#     needs: [terraform-plan]
-
-#     steps:
-#     # Checkout the repository to the GitHub Actions runner
-#     - name: Checkout
-#       uses: actions/checkout@v3
-
-#     # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
-#     - name: Setup Terraform
-#       uses: hashicorp/setup-terraform@v2
-
-#     # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
-#     - name: Terraform Init
-#       run: terraform init
-
-#     # Download saved plan from artifacts  
-#     - name: Download Terraform Plan
-#       uses: actions/download-artifact@v3
-#       with:
-#         name: tfplan
-
-#     # Terraform Apply
-#     - name: Terraform Apply
-#       run: terraform apply -auto-approve tfplan
-
-
-name: 'Terraform-plant-apply'
+name: "Terraform-Plan-Apply"
 
 on:
-    push:
-        branches: 'main'
-
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
 env:
-    ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
-    ARM_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
-    ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBCRIPTION_ID }}
-    ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+  ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+  ARM_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
+  ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+  ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
 
 jobs:
-    terraform-plan:
-        name: 'Terraform Plan'
-        runs-on: ubuntu-latest
+  terraform-plan:
+    name: terraform-plan
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
 
-        steps:
-            # Checkout the repository to the GitHub Actions runner
-            - name: Checkout code
-              uses: actions/checkout@v3
+    steps:
+    # Checkout the repository to the GitHub Actions runner
+    - name: Checkout
+      uses: actions/checkout@v3
 
-            # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
-            - name: Setup Terraform
-              uses: hashicorp/setup-terraform@v2
+    # Install the latest version of the Terraform CLI
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v2
+      with:
+        terraform_version: latest
+        terraform_wrapper: false
 
-            - name: Install Azure CLI
-              run: |
-                  curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+    # Login to Azure via Azure CLI
+    - name: Azure LogIn
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-            # Login to Azure
-            - name: Login to Azure
-              uses: azure/login@v1
-              with:
-                  creds: ${{ secrets.AZURE_CREDENTIALS }}
+    # Initialize a new or existing Terraform working directory
+    # Creating initial files, loading any remote state, downloading modules, etc.
+    - name: Terraform Init
+      id: init
+      run: terraform init
+      
+    # Checks that all Terraform configuration files adhere to a canonical format
+    - name: Terraform Format
+      run: terraform fmt
 
-            # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
-            - name: Terraform Init
-              run: terraform init
+    # Validate that all Terraform configuration files are valid
+    - name: Terraform Validate
+      run: terraform validate
 
-            # Checks that all Terraform configuration files adhere to a canonical format
-            - name: Terraform Format
-              run: terraform fmt
+    # Generates an execution plan for Terraform
+    - name: 'Terraform Plan'
+      id: plan
+      run: terraform plan -out=tfplan.out
+      # continue-on-error: true
 
-            # Validate that all Terraform configuration files are valid
-            - name: Terraform Validate
-              run: terraform validate
+    # Save plan to artifacts  
+    - name: Publish Terraform Plan
+      uses: actions/upload-artifact@v3
+      with:
+        name: tfplan
+        path: tfplan
 
-            # Generates an execution plan for Terraform
-            - name: Terraform Plan
-              id: tf-plan
-              run: terraform plan -out=tfplan.out
+  terraform-apply:
+    name: 'Terraform Apply'
+    runs-on: ubuntu-latest
+    needs: [terraform-plan]
 
-            # Save plan to artifacts
-            - name: Save Plan
-              uses: actions/upload-artifact@v3
-              with:
-                  name: tfplan
-                  path: tfplan
+    steps:
+    # Checkout the repository to the GitHub Actions runner
+    - name: Checkout
+      uses: actions/checkout@v3
 
-    terrafom-apply:
-        name: 'Terraform Apply'
-        runs-on: ubuntu-latest
-        needs: [terraform-plan]
+    # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v2
 
-        steps:
-            # Checkout the repository to the GitHub Actions runner
-            - name: Checkout code
-              uses: actions/checkout@v3
+    # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
+    - name: Terraform Init
+      run: terraform init
 
-            # Installs the latest version of Terraform CLI
-            - name: Setup Terraform
-              uses: hashicorp/setup-terraform@v2
+    # Download saved plan from artifacts  
+    - name: Download Terraform Plan
+      uses: actions/download-artifact@v3
+      with:
+        name: tfplan
 
-            # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
-            - name: Terraform Init
-              run: terraform init
+    # Terraform Apply
+    - name: Terraform Apply
+      run: terraform apply -auto-approve tfplan
 
-            # Download saved plan from artifacts
-            - name: Download Plan
-              uses: actions/download-artifact@v3
-              with:
-                  name: tfplan
 
-            # Terraform apply
-            - name: Terraform Apply
-              run: terraform apply -auto-approve tfplan
+# name: 'Terraform-plant-apply'
+
+# on:
+#     push:
+#         branches: 'main'
+
+# env:
+#     ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+#     ARM_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
+#     ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBCRIPTION_ID }}
+#     ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+
+# jobs:
+#     terraform-plan:
+#         name: 'Terraform Plan'
+#         runs-on: ubuntu-latest
+
+#         steps:
+#             # Checkout the repository to the GitHub Actions runner
+#             - name: Checkout code
+#               uses: actions/checkout@v3
+
+#             # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
+#             - name: Setup Terraform
+#               uses: hashicorp/setup-terraform@v2
+
+#             - name: Install Azure CLI
+#               run: |
+#                   curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+
+#             # Login to Azure
+#             - name: Login to Azure
+#               uses: azure/login@v1
+#               with:
+#                   creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+#             # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
+#             - name: Terraform Init
+#               run: terraform init
+
+#             # Checks that all Terraform configuration files adhere to a canonical format
+#             - name: Terraform Format
+#               run: terraform fmt
+
+#             # Validate that all Terraform configuration files are valid
+#             - name: Terraform Validate
+#               run: terraform validate
+
+#             # Generates an execution plan for Terraform
+#             - name: Terraform Plan
+#               id: tf-plan
+#               run: terraform plan -out=tfplan.out
+
+#             # Save plan to artifacts
+#             - name: Save Plan
+#               uses: actions/upload-artifact@v3
+#               with:
+#                   name: tfplan
+#                   path: tfplan
+
+#     terrafom-apply:
+#         name: 'Terraform Apply'
+#         runs-on: ubuntu-latest
+#         needs: [terraform-plan]
+
+#         steps:
+#             # Checkout the repository to the GitHub Actions runner
+#             - name: Checkout code
+#               uses: actions/checkout@v3
+
+#             # Installs the latest version of Terraform CLI
+#             - name: Setup Terraform
+#               uses: hashicorp/setup-terraform@v2
+
+#             # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
+#             - name: Terraform Init
+#               run: terraform init
+
+#             # Download saved plan from artifacts
+#             - name: Download Plan
+#               uses: actions/download-artifact@v3
+#               with:
+#                   name: tfplan
+
+#             # Terraform apply
+#             - name: Terraform Apply
+#               run: terraform apply -auto-approve tfplan
